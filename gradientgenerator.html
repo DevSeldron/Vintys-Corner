@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(to right, #ffffff, #f0f0f0);
+      transition: background 0.5s ease;
+    }
+
+    .toolbar {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+    }
+
+    button {
+      margin-right: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background-color: #3498db;
+      color: #fff;
+    }
+  </style>
+  <title>Gradient Generator</title>
+</head>
+<body>
+  <div class="toolbar" id="toolbar">
+    <button onclick="generateGradient()">Generate Gradient</button>
+    <button onclick="downloadImage()">Download as PNG</button>
+    <a href="https://vinty.viiah.com" target="_blank" rel="noopener noreferrer"><button>Home</button></a>
+  </div>
+
+  <script>
+    function generateGradient() {
+      const toolbar = document.getElementById('toolbar');
+      toolbar.style.display = 'none'; // Hide the toolbar instantly
+      const color1 = getRandomColor();
+      const color2 = getRandomColor();
+      document.body.style.background = `linear-gradient(to right, ${color1}, ${color2})`;
+      setTimeout(() => {
+        toolbar.style.display = 'flex'; // Show the toolbar after a short delay
+      }, 0);
+    }
+
+    function getRandomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    function downloadImage() {
+      const toolbar = document.getElementById('toolbar');
+      toolbar.style.display = 'none'; // Hide the toolbar instantly
+      html2canvas(document.body, { x: 0, y: 0, width: window.innerWidth, height: window.innerHeight }).then(canvas => {
+        const link = document.createElement('a');
+        link.href = canvas.toDataURL();
+        link.download = 'gradient.png';
+        link.click();
+        setTimeout(() => {
+          toolbar.style.display = 'flex'; // Show the toolbar after a short delay
+        }, 0);
+      });
+    }
+  </script>
+</body>
+</html>
