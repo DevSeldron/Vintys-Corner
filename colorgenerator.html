@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+      transition: background-color 0.5s ease;
+    }
+
+    .color-container {
+      text-align: center;
+    }
+
+    #color-code {
+      font-size: 24px;
+      margin-bottom: 20px;
+      transition: opacity 1s ease-in-out;
+      font-family: arial;
+    }
+
+    #color-display {
+      width: 200px;
+      height: 200px;
+      border: 1px solid #000;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .toolbar {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      transition: opacity 1s ease-in-out;
+    }
+
+    button {
+      margin-right: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background-color: #3498db;
+      color: #fff;
+    }
+  </style>
+  <title>Color Generator</title>
+</head>
+<body>
+  <div class="toolbar" id="toolbar">
+    <button onclick="generateColor()">Generate Color</button>
+    <button onclick="downloadImage()">Download as PNG</button>
+    <a href="https://vinty.viiah.com" target="_blank" rel="noopener noreferrer"><button>Home</button></a>
+  </div>
+
+  <div class="color-container">
+    <div id="color-code">#FFFFFF</div>
+    <div id="color-display" style="width: 200px; height: 200px; border: 1px solid #000;"></div>
+  </div>
+
+  <script>
+    function generateColor() {
+      const toolbar = document.getElementById('toolbar');
+
+      const randomColor = getRandomColor();
+      document.body.style.backgroundColor = randomColor;
+      const colorCode = document.getElementById('color-code');
+      const colorDisplay = document.getElementById('color-display');
+      
+      colorCode.innerText = randomColor;
+      colorDisplay.style.backgroundColor = randomColor;
+
+      setTimeout(() => {
+        toolbar.style.opacity = 1; // Show the toolbar after one second
+      }, 3000);
+    }
+
+    function getRandomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    function downloadImage() {
+      const toolbar = document.getElementById('toolbar');
+      const colorCode = document.getElementById('color-code');
+      const colorDisplay = document.getElementById('color-display');
+      
+      // Hide the toolbar, hex code text, and border instantly when Download as PNG button is clicked
+      toolbar.style.opacity = 0;
+      colorCode.style.opacity = 0;
+      colorDisplay.style.opacity = 0;
+
+      setTimeout(() => {
+        html2canvas(document.body, { x: 0, y: 0, width: window.innerWidth, height: window.innerHeight }).then(canvas => {
+          const link = document.createElement('a');
+          link.href = canvas.toDataURL();
+          link.download = 'color.png';
+          link.click();
+          
+          // Show the toolbar, hex code text, and border after one second
+          toolbar.style.opacity = 1;
+          colorCode.style.opacity = 1;
+          colorDisplay.style.opacity = 1;
+        });
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
