@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Always On Display Clock</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Montserrat', sans-serif;
+            position: relative;
+            transition: background 0.3s, color 0.3s;
+        }
+        body.light-mode {
+            background: white;
+            color: black;
+        }
+        .clock-container {
+            position: relative;
+            text-align: center;
+        }
+        .clock {
+            font-size: 5rem;
+            font-weight: 700;
+            position: relative;
+            padding: 20px 40px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 5px;
+            font-stretch: 125%;
+            transition: transform 0.4s ease-out, opacity 0.3s ease-out, background 0.3s, box-shadow 0.3s;
+            transform: translateX(-50%) scale(0.8);
+            opacity: 0;
+        }
+        .clock.slide-in {
+            transform: translateX(0) scale(1);
+            opacity: 1;
+        }
+        .light-mode .clock{
+            background: rgba(0, 0, 0, 0.05);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+        .date {
+            font-size: 1.5rem;
+            text-align: left;
+            margin-top: 10px;
+            font-weight: 300;
+            font-family: 'Montserrat', sans-serif;
+        }
+        #fullscreen-button, #mode-button, #home-button {
+            position: absolute;
+            top: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+        }
+        #fullscreen-button {
+            left: 10px;
+        }
+        #mode-button {
+            right: 10px;
+        }
+        #home-button {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .light-mode #fullscreen-button, .light-mode #mode-button, .light-mode #home-button{
+            color: black;
+            background: rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <button id="fullscreen-button">Fullscreen</button>
+    <button id="mode-button">Light Mode</button>
+    <button id="home-button">Home</button>
+    <div class="clock-container">
+        <div class="clock" id="clock"></div>
+        <div class="date" id="date"></div>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            
+            document.getElementById('clock').textContent = `${hours}:${minutes}`;
+
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('date').textContent = now.toLocaleDateString(undefined, options);
+        }
+        setInterval(updateClock, 60000);
+        updateClock();
+
+        document.getElementById('fullscreen-button').addEventListener('click', function() {
+            if (document.fullscreenElement) {
+                document.exitFullscreen();
+            } else {
+                document.documentElement.requestFullscreen();
+            }
+        });
+
+        const modeButton = document.getElementById('mode-button');
+        modeButton.addEventListener('click', function() {
+            document.body.classList.toggle('light-mode');
+            modeButton.textContent = document.body.classList.contains('light-mode') ? 'Dark Mode' : 'Light Mode';
+        });
+
+        window.addEventListener('load', function() {
+            const clockElement = document.getElementById('clock');
+            clockElement.classList.add('slide-in');
+        });
+
+        document.getElementById('home-button').addEventListener('click', function() {
+            window.location.href = 'https://viiah.com';
+        });
+    </script>
+</body>
+</html>
