@@ -4,48 +4,77 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tools Page</title>
-<style>
+  <style>
+    body {
+      background-color: #202020;
+      color: white;
+      font-family: arial;
+      justify-content: center;
+      text-align: center;
+    }
 
-body {background-color: #202020; color: white; font-family: arial; justify-content: center; text-align: center;}
+    p {
+      color: white;
+      font-family: arial;
+      justify-content: center;
+      text-align: center;
+    }
 
-p {color: white; font-family: arial; justify-content: center; text-align: center;}
+    button {
+      border-radius: 5px;
+      border-type: groove;
+      border-color: #2f7754;
+      font-size: 20px;
+      background-color: #2f7754;
+      color: white;
+      margin-bottom: 15px;
+      height: 30px;
+    }
 
-button {border-radius: 5px; border-type: groove; border-color: #2f7754; font-size: 20px; background-color: #2f7754; color: white; margin-bottom: 15px; height: 30px;}
+    a {
+      border-radius: 5px;
+      border-type: groove;
+      border-color: #2f7754;
+      font-size: 20px;
+      background-color: #2f7754;
+      color: white;
+      margin-bottom: 15px;
+      height: 30px;
+    }
 
-a {border-radius: 5px; border-type: groove; border-color: #2f7754; font-size: 20px; background-color: #2f7754; color: white; margin-bottom: 15px; height: 30px;}
+    .info {
+      background-color: #393939;
+      justify-content: center;
+      align: center;
+      border-type: solid;
+      border-radius: 10px;
+    }
 
-.info {
-background-color: #393939;
-justify-content: center;
-align: center;
-border-type: solid;
-border-radius: 10px;
-}
-
-.headerdiv {
-background-color: #266245;
-justify-content: center;
-align: center;
-border-type: solid;
-border-radius: 10px;
-}
-</style>
+    .headerdiv {
+      background-color: #266245;
+      justify-content: center;
+      align: center;
+      border-type: solid;
+      border-radius: 10px;
+    }
+  </style>
 </head>
 
 <body>
-<div class=headerdiv>
-<h1>Tools Page</h1>
-</div>
-<p>Here you can find random tools and time wasting tools, some are for fun.</p>
-<div class=info>
-<h2 class=h2div>Tools</h2>
-<h3 class=h3div>Color Tools</h3>
-<button onclick="document.location='gradientgenerator'">Gradient Generator</button>
-<button onclick="document.location='colorgenerator'">Color Generator</button>
-<h3 class=h3div>Number Generators</h3>
-<button onclick="document.location='RNG'">Random Number Generator</button>
-<button onclick="document.location='Other/AOD'">Always On Display</button>
-</div>
+  <div class="headerdiv">
+    <h1>Tools Page</h1>
+  </div>
+  <p>Here you can find random tools and time wasting tools, some are for fun.</p>
+  <div class="info">
+    <h2 class="h2div">Tools</h2>
+    <h3 class="h3div">Color Tools</h3>
+    <button onclick="document.location='gradientgenerator'">Gradient Generator</button>
+    <button onclick="document.location='colorgenerator'">Color Generator</button>
+    <h3 class="h3div">Number Generators</h3>
+    <button onclick="document.location='RNG'">Random Number Generator</button>
+    <h3 class="h3div">Other</h3>
+    <button onclick="document.location='Other/AOD'">Always On Display</button>
+  </div>
 </body>
 
 </html>
